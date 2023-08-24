@@ -27,17 +27,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Column(
           children: <Widget>[
-            _imgLogin(),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/login_page');
-              },
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Inizia', style: TextStyle(fontSize: 20)),
-              ),
-            ),
+            _imgLogin(), //immagine login
+            _rowbtnlogin(),
           ],
         ),
       ),
@@ -47,5 +38,32 @@ class _LoginPageState extends State<LoginPage> {
   Widget _imgLogin() => const Image(
         image: AssetImage('assets/images/loginimg.png'),
         alignment: Alignment.topCenter,
+      );
+
+  Widget _rowbtnlogin() => Container(
+        color: Colors.blue.shade400,
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //aggiunti 2 textbutton registrati e login
+            TextButton(
+              onPressed: null,
+              child: Text(
+                'Registrati',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ),
+            TextButton(
+              onPressed: null,
+              child: Text(
+                'Login',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
       );
 }
