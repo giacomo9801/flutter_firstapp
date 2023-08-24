@@ -1,6 +1,8 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_firstapp/pages/theme.dart';
 
 class BubbleIndicator extends CustomPainter {
   //coordinate dove disegnare la bolla
@@ -13,10 +15,10 @@ class BubbleIndicator extends CustomPainter {
   final PageController pageController;
 
   BubbleIndicator(
-      {this.dxTarget = 125,
-      this.dxEntry = 4,
-      this.radius = 30,
-      this.dy = 35,
+      {this.dxTarget = 120,
+      this.dxEntry = 26,
+      this.radius = 25,
+      this.dy = 25,
       required this.pageController})
       : painter = Paint()
           //elementi riempiti di bianco
@@ -30,9 +32,21 @@ class BubbleIndicator extends CustomPainter {
     final target = Offset(dxTarget, dy);
 
     final path = Path();
+//disegna l'arco sx
+    path.addArc(Rect.fromCircle(center: entry, radius: radius), 0.5 * pi, pi);
 //disegna il rettangolo (bisogna trovare le coordinate giuste)
     path.addRect(Rect.fromLTRB(entry.dx, dy - radius, target.dx, dy + radius));
+    //disegna l'arco dx
+    path.addArc(Rect.fromCircle(center: target, radius: radius), 1.5 * pi, pi);
 
+    //gestione della bolla in base al pulsante
+    final pos = pageController.position;
+    final fullExtent =
+        (pos.maxScrollExtent - pos.minScrollExtent + pos.viewportDimension);
+    final pageOffset = pos.extentBefore / fullExtent;
+//movimento della bolla
+    canvas.translate(size.width * pageOffset, 0.0);
+    canvas.drawShadow(path, CustomTheme.gradientStart, 3.0, true);
     canvas.drawPath(path, painter);
   }
 

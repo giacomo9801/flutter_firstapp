@@ -55,10 +55,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget _rowbtnlogin() => Container(
         decoration: BoxDecoration(
           color: Colors.blue.shade400,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(35),
         ),
-        height: 70,
-        width: 250,
+        height: 50,
+        width: 290,
         child: CustomPaint(
           //custom Paint serve per "colorare" l indicatore della pagina corrente
           painter: BubbleIndicator(pageController: _pageController),
