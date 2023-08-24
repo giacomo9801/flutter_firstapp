@@ -14,7 +14,6 @@ class WelcomePage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            //colors: [CustomTheme.gradientStart, CustomTheme.gradientEnd],
             colors: [CustomTheme.gradientStart, CustomTheme.gradientEnd],
           ),
         ),
