@@ -1,7 +1,7 @@
-// ignore_for_file: use_function_type_syntax_for_parameters
-
 import 'package:flutter/material.dart';
 import 'package:flutter_firstapp/pages/theme.dart';
+import 'package:flutter_firstapp/pages/widgets/SignIn.dart';
+import 'package:flutter_firstapp/pages/widgets/SignUp.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,6 +11,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late PageController
+      _pageController; //servirà per passare da una pagina all'altra
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text('Pagina di Login'),
       ),
       body: Container(
+        padding: const EdgeInsets.only(top: 30),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -29,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             _imgLogin(), //immagine login
             _rowbtnlogin(),
+            _pageView(),
           ],
         ),
       ),
@@ -41,29 +52,58 @@ class _LoginPageState extends State<LoginPage> {
       );
 
   Widget _rowbtnlogin() => Container(
-        color: Colors.blue.shade400,
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        decoration: BoxDecoration(
+          color: Colors.blue.shade400,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        height: 70,
+        width: 250,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             //aggiunti 2 textbutton registrati e login
-            TextButton(
-              onPressed: null,
-              child: Text(
-                'Registrati',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+            Expanded(
+              child: TextButton(
+                onPressed: () {
+                  _pageController.animateToPage(0,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.ease);
+                },
+                child: const Text(
+                  'Registrati',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-            TextButton(
-              onPressed: null,
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
+            Expanded(
+              //con expanded si espande il bottone esattamente per la metà dello spazio a disposizione
+              child: TextButton(
+                onPressed: () {
+                  _pageController.animateToPage(1,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.ease);
+                },
+                child: const Text(
+                  'Login',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
           ],
+        ),
+      );
+
+  Widget _pageView() => Expanded(
+        child: PageView(
+          controller:
+              _pageController, //abbiamo collegato il controller scritto sopra
+          children: const [SignIn(), SignUp()],
         ),
       );
 }
