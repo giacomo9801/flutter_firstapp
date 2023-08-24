@@ -15,6 +15,9 @@ class _LoginPageState extends State<LoginPage> {
   late PageController
       _pageController; //servirà per passare da una pagina all'altra
 
+  Color signInColor = Colors.black;
+  Color signUpColor = Colors.black;
+
   @override
   void initState() {
     super.initState();
@@ -68,16 +71,19 @@ class _LoginPageState extends State<LoginPage> {
               //aggiunti 2 textbutton registrati e login
               Expanded(
                 child: TextButton(
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                  ),
                   onPressed: () {
                     _pageController.animateToPage(0,
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.ease);
                   },
-                  child: const Text(
+                  child: Text(
                     'Registrati',
                     style: TextStyle(
                         fontSize: 20,
-                        color: Colors.white,
+                        color: signUpColor,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -85,16 +91,19 @@ class _LoginPageState extends State<LoginPage> {
               Expanded(
                 //con expanded si espande il bottone esattamente per la metà dello spazio a disposizione
                 child: TextButton(
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                  ),
                   onPressed: () {
                     _pageController.animateToPage(1,
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.ease);
                   },
-                  child: const Text(
+                  child: Text(
                     'Login',
                     style: TextStyle(
                         fontSize: 20,
-                        color: Colors.white,
+                        color: signInColor,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -106,6 +115,12 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _pageView() => Expanded(
         child: PageView(
+          onPageChanged: (index) {
+            setState(() {
+              signInColor = index == 0 ? Colors.white : Colors.black;
+              signUpColor = index == 1 ? Colors.white : Colors.black;
+            });
+          },
           controller:
               _pageController, //abbiamo collegato il controller scritto sopra
           children: const [SignIn(), SignUp()],
