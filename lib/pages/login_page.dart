@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text('Pagina di Login'),
       ),
       body: Container(
-        padding: const EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top: 5),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -39,12 +39,16 @@ class _LoginPageState extends State<LoginPage> {
             colors: [CustomTheme.gradientStart, CustomTheme.gradientEnd],
           ),
         ),
-        child: Column(
-          children: <Widget>[
-            _imgLogin(), //immagine login
-            _rowbtnlogin(),
-            _pageView(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20, left: 20),
+          child: Column(
+            children: <Widget>[
+              _imgLogin(), //immagine login
+              _rowbtnlogin(),
+
+              _pageView(),
+            ],
+          ),
         ),
       ),
     );
