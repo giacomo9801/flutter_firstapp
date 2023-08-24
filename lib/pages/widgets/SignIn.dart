@@ -8,6 +8,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  bool _isObscure = true; //controlla se visualizzare o meno la password
   @override
   Widget build(BuildContext context) => Card(
           child: SizedBox(
@@ -37,12 +38,21 @@ class _SignInState extends State<SignIn> {
   Widget _passwordField() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: TextFormField(
-          obscureText: true,
-          decoration: const InputDecoration(
+          obscureText: _isObscure,
+          decoration: InputDecoration(
             labelText: 'Password',
             hintText: 'Inserisci la tua password',
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0),
-            icon: Icon(Icons.password),
+            hintStyle: const TextStyle(color: Colors.grey, fontSize: 12.0),
+            icon: const Icon(Icons.password),
+            suffixIcon: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isObscure = !_isObscure;
+                  });
+                },
+                child: _isObscure
+                    ? const Icon(Icons.visibility_off)
+                    : const Icon(Icons.visibility)),
           ),
           keyboardType: TextInputType.visiblePassword,
           validator: (String? value) {
