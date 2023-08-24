@@ -15,8 +15,26 @@ class _SignInState extends State<SignIn> {
   final _focusNodePassword = FocusNode();
 
   @override
+  void dispose() {
+    super.dispose();
+    _focusNodeEmail.dispose();
+    _focusNodePassword.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(top: 24, bottom: 24),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            _formWidget(),
+            _signInButton(),
+          ],
+        ), //stack serve per sovrapporre i widget
+      );
+
+  Widget _formWidget() => Padding(
+        padding: const EdgeInsets.only(bottom: 13.0),
         child: Card(
             elevation: 2.0,
             color: Colors.white,
@@ -25,7 +43,13 @@ class _SignInState extends State<SignIn> {
             ),
             child: SizedBox(
               width: 300.0,
-              child: Column(children: [_emailField(), _passwordField()]),
+              child: Column(children: [
+                _emailField(),
+                const Divider(
+                  height: 0,
+                ),
+                _passwordField()
+              ]),
             )),
       );
 
@@ -44,6 +68,25 @@ class _SignInState extends State<SignIn> {
           },
           keyboardType: TextInputType.emailAddress,
         ),
+      );
+
+  // Widget _forgotPasswordBtn() => TextButton(
+  //       onPressed: () {},
+  //       child: const Text(
+  //         "Password dimenticata?",
+  //         style: TextStyle(color: Colors.white),
+  //       ),
+  //     );
+
+  Widget _signInButton() => ElevatedButton(
+        child: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 18.0),
+          child: Text(
+            "accedi",
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
+          ),
+        ),
+        onPressed: () {},
       );
 
   Widget _passwordField() => Padding(
