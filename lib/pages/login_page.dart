@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firstapp/custompaint/bubble_indicator.dart';
 import 'package:flutter_firstapp/pages/theme.dart';
 import 'package:flutter_firstapp/pages/widgets/SignIn.dart';
 import 'package:flutter_firstapp/pages/widgets/SignUp.dart';
@@ -58,44 +59,48 @@ class _LoginPageState extends State<LoginPage> {
         ),
         height: 70,
         width: 250,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            //aggiunti 2 textbutton registrati e login
-            Expanded(
-              child: TextButton(
-                onPressed: () {
-                  _pageController.animateToPage(0,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.ease);
-                },
-                child: const Text(
-                  'Registrati',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+        child: CustomPaint(
+          //custom Paint serve per "colorare" l indicatore della pagina corrente
+          painter: BubbleIndicator(pageController: _pageController),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              //aggiunti 2 textbutton registrati e login
+              Expanded(
+                child: TextButton(
+                  onPressed: () {
+                    _pageController.animateToPage(0,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.ease);
+                  },
+                  child: const Text(
+                    'Registrati',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              //con expanded si espande il bottone esattamente per la metà dello spazio a disposizione
-              child: TextButton(
-                onPressed: () {
-                  _pageController.animateToPage(1,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.ease);
-                },
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+              Expanded(
+                //con expanded si espande il bottone esattamente per la metà dello spazio a disposizione
+                child: TextButton(
+                  onPressed: () {
+                    _pageController.animateToPage(1,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.ease);
+                  },
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
 
