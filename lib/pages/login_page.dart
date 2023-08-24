@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.only(right: 20, left: 20),
           child: Column(
-            children: <Widget>[
+            children: <Widget>[ //
               _imgLogin(), //immagine login
               _rowbtnlogin(),
 
