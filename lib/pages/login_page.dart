@@ -4,6 +4,7 @@ import 'package:flutter_firstapp/pages/theme.dart';
 import 'package:flutter_firstapp/pages/widgets/SignIn.dart';
 import 'package:flutter_firstapp/pages/widgets/SignUp.dart';
 
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -15,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   late PageController
       _pageController; //servirà per passare da una pagina all'altra
 
-  Color signInColor = Colors.black;
+  Color signInColor = Colors.white;
   Color signUpColor = Colors.black;
 
   @override
@@ -42,7 +43,8 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.only(right: 20, left: 20),
           child: Column(
-            children: <Widget>[ //
+            children: <Widget>[
+              //
               _imgLogin(), //immagine login
               _rowbtnlogin(),
 
